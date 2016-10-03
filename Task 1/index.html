@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="task1">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Task 1: Javascript</title>
+		
+		<script src="angular.min.js"></script>
+		<script src="script.js"></script>
+		<script src="service.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<style>
+			body {
+				margin: 30px;
+				overflow-x: hidden;
+			}
+			li {
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+
+	<body ng-controller="TaskController"">
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-5 col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="text-align: center">
+						<span class="panel-title">Task 1: Javascript</span>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>Build a simple HTML/JS app preferably based on AngularJS v1 which, when you open the site, asks for a permission to read your current location, 
+								and then uses the <a href="http://openweathermap.org/current">http://openweathermap.org/current</a> 
+								public API to fetch the weather for that location and displays it.</li>
+							<li>If the user denies to share the location, show a little input form for entering postcode or country, 
+								and display the weather based on that location.</li>
+						</ul>
+						<div class="row" style="text-align: center">
+							<button type="button" class="btn btn-danger" ng-click="Reset()">Reset Task</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-offset-1 col-lg-4 col-xs-12" ng-show="flagLocation">
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="text-align: center">
+						<span class="panel-title">The user does not want to share the location</span>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<label class="control-label">Postcode: </label> 
+								<input type="text" class="form-control" ng-model="postcode" id="postcode">
+							</div>
+							<div class="col-lg-6">
+								<label class="control-label">Country: </label> 
+								<input type="text" class="form-control" ng-model="country" id="country">
+							</div>
+						</div>
+						<div class="row" style="text-align: center">
+							<button type="button" class="btn btn-info" ng-click="getWeatherByUser()" style="margin: 20px 0">Weather Service</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-offset-1 col-lg-4 col-xs-12" ng-show="flagAnswer">
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="text-align: center">
+						<span class="panel-title">Weather Information for {{answer.place}}</span>
+					</div>
+					<div class="panel-body">
+						<div class="row" style="margin: 0 20px">
+							<p>{{answer.description}}</p> 
+						</div>
+						<ul class="list-group" style="margin: 20px">
+							<li class="list-group-item">
+								<div class="row">
+									<label class="control-label col-lg-4">Temperature: </label> 
+									<spam class="col-lg-3">{{answer.temperature}}</spam> 
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="row">
+									<label class="control-label col-lg-4">Humidity:</label> 
+									<spam class="col-lg-3">{{answer.humidity}}</spam> 
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="row">
+									<label class="control-label col-lg-4">Pressure:</label> 
+									<spam class="col-lg-3">{{answer.pressure}}</spam> 
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="row">
+									<label class="control-label col-lg-4">Wind:</label> 
+									<spam class="col-lg-3">{{answer.windSpeed}}</spam> 
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-offset-1 col-lg-4 col-xs-12" ng-show="flagError">
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="text-align: center">
+						<span class="panel-title">We are sorry, an error occurred</span>
+					</div>
+					<div class="panel-body">
+						<div class="row" style="margin: 20px">
+							<p>{{result}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+  
+</html>
