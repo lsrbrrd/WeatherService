@@ -7,7 +7,7 @@ angular.module('WeatherService', [])
 				answer = $http.get(path + 'lat=' + lat + '&lon=' + lon + '&APPID=f43b4783f283d7b4dbe21444fd703644');
 				return answer;
 			},
-			post : function(code){
+			posts : function(code){
 				answer = $http.get(path + 'zip=' + code + '&APPID=f43b4783f283d7b4dbe21444fd703644');
 				return answer;	
 			}	
