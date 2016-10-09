@@ -75,33 +75,41 @@ function TaskController($scope, WeatherRequest) {
 	
 	$scope.getWeather = function(location){
 		WeatherRequest.posts(location.latitude, location.longitude).success(function (data){
-			if (data.cod == "200"){
-				$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
-				$scope.flagAnswer = true;
-				$scope.flagError = false;
-			}
-			else{
+				if (data.cod == "200"){
+					$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
+					$scope.flagAnswer = true;
+					$scope.flagError = false;
+				}
+				else{
+					$scope.result = data.message;
+					$scope.flagError = true;
+					$scope.flagAnswer = false;
+				}
+			}).error(function (data){ 
 				$scope.result = data.message;
 				$scope.flagError = true;
 				$scope.flagAnswer = false;
-			}
-		});
+			});
 	};
 	
 	$scope.getWeatherByUser = function(){
 		var code = $scope.postcode + "," + $scope.country;
 		WeatherRequest.posts(code).success(function (data){
-			if (data.cod == "200"){
-				$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
-				$scope.flagAnswer = true;
-				$scope.flagError = false;
-			}
-			else{
+				if (data.cod == "200"){
+					$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
+					$scope.flagAnswer = true;
+					$scope.flagError = false;
+				}
+				else{
+					$scope.result = data.message;
+					$scope.flagError = true;
+					$scope.flagAnswer = false;
+				}
+			}).error(function (data){ 
 				$scope.result = data.message;
 				$scope.flagError = true;
 				$scope.flagAnswer = false;
-			}
-		});
+			});
 		$scope.flagLocation = false;
 	};
 	
