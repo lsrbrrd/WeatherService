@@ -74,7 +74,7 @@ function TaskController($scope, WeatherRequest) {
 	};
 	
 	$scope.getWeather = function(location){
-		WeatherRequest.posts(location.latitude, location.longitude).success(function (data){
+		WeatherRequest.getWeatherByLocation(location.latitude, location.longitude).success(function (data){
 				if (data.cod == "200"){
 					$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
 					$scope.flagAnswer = true;
@@ -94,7 +94,7 @@ function TaskController($scope, WeatherRequest) {
 	
 	$scope.getWeatherByUser = function(){
 		var code = $scope.postcode + "," + $scope.country;
-		WeatherRequest.posts(code).success(function (data){
+		WeatherRequest.getWeatherByZip(code).success(function (data){
 				if (data.cod == "200"){
 					$scope.answer = new $scope.weather(data.name, data.weather[0].description, data.main.temp, data.main.humidity, data.main.pressure, data.wind.speed);
 					$scope.flagAnswer = true;
